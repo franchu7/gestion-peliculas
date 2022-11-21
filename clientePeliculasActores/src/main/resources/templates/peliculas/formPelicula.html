@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PeliculasActoresApp | Aplicación de gestión de peliculas y actores</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h2 th:text="${titulo}"
+        class="text-secondary border border-success border-top-0 border-left-0 border-right-0"></h2>
+    <form th:action="@{/peliculas/guardarPelicula/}" method="post" th:object="${pelicula}">
+        <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role='alert'>
+            Por favor corrija los siguientes errores:
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
+            </ul>
+        </div>
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Titulo</label>
+            <input type="text" class="form-control" th:field="*{titulo}" id="titulo" name="titulo"
+                   placeholder="Escriba el titulo de la pelicula" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="anno" class="form-label">Año</label>
+            <input type="number" class="form-control" th:field="*{anno}" id="anno" name="anno"
+                   placeholder="Escriba el año de la pelicula" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="duracion" class="form-label">Duracion</label>
+            <input type="number" class="form-control" th:field="*{duracion}" id="duracion" name="duracion"
+                   placeholder="Escriba la duracion de la pelicula en minutos" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="pais" class="form-label">Pais</label>
+            <input type="text" class="form-control" th:field="*{pais}" id="pais" name="pais"
+                   placeholder="Escriba el pais de la pelicula" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Direccion</label>
+            <input type="text" class="form-control" th:field="*{direccion}" id="direccion" name="direccion"
+                   placeholder="Escriba el director de la pelicula" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="genero" class="form-label">Genero</label>
+            <input type="text" class="form-control" th:field="*{genero}" id="genero" name="genero"
+                   placeholder="Escriba el genero de la pelicula" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="sinopsis" class="form-label">Sinopsis</label>
+            <input type="text" class="form-control" th:field="*{sinopsis}" id="sinopsis" name="sinopsis"
+                   placeholder="Escriba la sinopsis de la pelicula" required="required">
+        </div>
+        <div class="mb-3">
+            <label for="portada" class="form-label">Portada</label>
+            <input type="text" class="form-control" th:field="*{portada}" id="portada" name="portada"
+                   placeholder="Escriba la ruta de la portada de la pelicula" required="required">
+        </div>
+
+
+        <button type="submit" class="btn btn-dark">Guardar</button>
+        <input type="hidden" th:field="*{idPelicula}" />
+    </form>
+    <hr>
+    <a class="btn btn-primary" role="button" th:href="@{/peliculas/}">Ir a Inicio</a>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

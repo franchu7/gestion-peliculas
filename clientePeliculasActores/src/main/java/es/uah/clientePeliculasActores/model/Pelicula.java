@@ -1,46 +1,37 @@
-package es.uah.peliculasActores.model;
+package es.uah.clientePeliculasActores.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-@Entity
-@Table(name = "peliculas", schema = "peliculasactoresdb", catalog = "")
 public class Pelicula {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "idPelicula")
+
     private Integer idPelicula;
-    @Basic
-    @Column(name = "titulo")
     private String titulo;
-    @Basic
-    @Column(name = "anno")
     private Integer anno;
-    @Basic
-    @Column(name = "duracion")
     private Integer duracion;
-    @Basic
-    @Column(name = "pais")
     private String pais;
-    @Basic
-    @Column(name = "direccion")
     private String direccion;
-    @Basic
-    @Column(name = "genero")
     private String genero;
-    @Basic
-    @Column(name = "sinopsis")
     private String sinopsis;
-    @Basic
-    @Column(name = "portada")
     private String portada;
 
-    @ManyToMany(mappedBy = "peliculas")
-    @JsonIgnoreProperties("peliculas")
     private List<Actor> actores;
+
+    public Pelicula(Integer idPelicula, String titulo, Integer anno, Integer duracion, String pais, String direccion, String genero, String sinopsis, String portada, List<Actor> actores) {
+        this.idPelicula = idPelicula;
+        this.titulo = titulo;
+        this.anno = anno;
+        this.duracion = duracion;
+        this.pais = pais;
+        this.direccion = direccion;
+        this.genero = genero;
+        this.sinopsis = sinopsis;
+        this.portada = portada;
+        this.actores = actores;
+    }
+
+    public Pelicula() {
+    }
 
     public Integer getIdPelicula() {
         return idPelicula;
@@ -118,6 +109,14 @@ public class Pelicula {
         return actores;
     }
 
+    public List<String> getNombresActores() {
+        List<String> nombresActores = new ArrayList<>();
+        for(int i = 0; i < this.actores.size(); i++) {
+            nombresActores.add(this.actores.get(i).getNombre());
+        }
+        return nombresActores;
+    }
+
     public void setActores(List<Actor> actores) {
         this.actores = actores;
     }
@@ -132,18 +131,5 @@ public class Pelicula {
         if (actor != null) {
             getActores().remove(actor);
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pelicula pelicula = (Pelicula) o;
-        return Objects.equals(idPelicula, pelicula.idPelicula) && Objects.equals(titulo, pelicula.titulo) && Objects.equals(anno, pelicula.anno) && Objects.equals(duracion, pelicula.duracion) && Objects.equals(pais, pelicula.pais) && Objects.equals(direccion, pelicula.direccion) && Objects.equals(genero, pelicula.genero) && Objects.equals(sinopsis, pelicula.sinopsis) && Objects.equals(portada, pelicula.portada);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idPelicula);
     }
 }

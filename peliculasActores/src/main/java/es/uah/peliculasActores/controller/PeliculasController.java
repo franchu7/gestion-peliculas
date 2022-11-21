@@ -1,5 +1,6 @@
 package es.uah.peliculasActores.controller;
 
+import es.uah.peliculasActores.model.Actor;
 import es.uah.peliculasActores.model.Pelicula;
 import es.uah.peliculasActores.service.IPeliculasService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +29,24 @@ public class PeliculasController {
         return peliculasService.buscarPeliculasPorTitulo(titulo);
     }
 
-    @GetMapping("/peliculas/año/{año}")
-    public List<Pelicula> buscarPeliculasPorAño(@PathVariable("año") Integer año) {
-        return peliculasService.buscarPeliculasPorAño(año);
+    @GetMapping("/peliculas/anno/{anno}")
+    public List<Pelicula> buscarPeliculasPorAnno(@PathVariable("anno") Integer anno) {
+        return peliculasService.buscarPeliculasPorAnno(anno);
     }
 
     @GetMapping("/peliculas/pais/{pais}")
     public List<Pelicula> buscarPeliculasPorPais(@PathVariable("pais") String pais) {
         return peliculasService.buscarPeliculasPorPais(pais);
+    }
+
+    @GetMapping("/peliculas/genero/{genero}")
+    public List<Pelicula> buscarPeliculasPorGenero(@PathVariable("genero") String genero) {
+        return peliculasService.buscarPeliculasPorGenero(genero);
+    }
+
+    @GetMapping("/peliculas/actor/{nombreActor}")
+    public List<Pelicula> buscarPeliculasPorActor(@PathVariable("nombreActor") String nombreActor) {
+        return peliculasService.buscarPeliculasPorActor(nombreActor);
     }
 
     @PostMapping("/peliculas")

@@ -9,4 +9,5 @@ import java.util.List;
 public interface IActoresJPA extends JpaRepository<Actor, Integer> {
 
     List<Actor> findByPais(String pais);
+    List<Actor> findByNombre(String nombre);
 }

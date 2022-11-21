@@ -30,6 +30,7 @@ public class ActoresController {
 
     @PostMapping("/actores")
     public void guardarActor(@RequestBody Actor actor) {
+
         actoresService.guardarActor(actor);
     }
 

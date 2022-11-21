@@ -1,9 +1,11 @@
 package es.uah.peliculasActores.dao;
 
+import es.uah.peliculasActores.model.Actor;
 import es.uah.peliculasActores.model.Pelicula;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +14,8 @@ public class PeliculasDAOImpl implements IPeliculasDAO {
 
     @Autowired
     IPeliculasJPA peliculasJPA;
+    @Autowired
+    IActoresJPA actoresJPA;
 
     @Override
     public List<Pelicula> buscarTodos() {
@@ -33,13 +37,29 @@ public class PeliculasDAOImpl implements IPeliculasDAO {
     }
 
     @Override
-    public List<Pelicula> buscarPeliculasPorAño(Integer año) {
-        return peliculasJPA.findByAño(año);
+    public List<Pelicula> buscarPeliculasPorAnno(Integer anno) {
+        return peliculasJPA.findByAnno(anno);
     }
 
     @Override
     public List<Pelicula> buscarPeliculasPorPais(String pais) {
         return peliculasJPA.findByPais(pais);
+    }
+
+    @Override
+    public List<Pelicula> buscarPeliculasPorGenero(String genero) {
+        return peliculasJPA.findByGenero(genero);
+    }
+
+    @Override
+    public List<Pelicula> buscarPeliculasPorActor(String nombreActor) {
+
+        List<Actor> actores = actoresJPA.findByNombre(nombreActor);
+
+        if (actores.size() > 0) {
+            return actores.get(0).getPeliculas();
+        }
+        return new ArrayList<>();
     }
 
     @Override
@@ -56,4 +76,5 @@ public class PeliculasDAOImpl implements IPeliculasDAO {
     public void actualizarPelicula(Pelicula pelicula) {
         peliculasJPA.save(pelicula);
     }
+
 }

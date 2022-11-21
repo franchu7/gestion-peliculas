@@ -1,6 +1,7 @@
 package es.uah.peliculasActores.service;
 
 import es.uah.peliculasActores.dao.IPeliculasDAO;
+import es.uah.peliculasActores.model.Actor;
 import es.uah.peliculasActores.model.Pelicula;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,13 +30,23 @@ public class PeliculasServiceImpl implements IPeliculasService {
     }
 
     @Override
-    public List<Pelicula> buscarPeliculasPorAño(Integer año) {
-        return peliculasDAO.buscarPeliculasPorAño(año);
+    public List<Pelicula> buscarPeliculasPorAnno(Integer anno) {
+        return peliculasDAO.buscarPeliculasPorAnno(anno);
     }
 
     @Override
     public List<Pelicula> buscarPeliculasPorPais(String pais) {
         return peliculasDAO.buscarPeliculasPorPais(pais);
+    }
+
+    @Override
+    public List<Pelicula> buscarPeliculasPorGenero(String genero) {
+        return peliculasDAO.buscarPeliculasPorGenero(genero);
+    }
+
+    @Override
+    public List<Pelicula> buscarPeliculasPorActor(String nombreActor) {
+        return peliculasDAO.buscarPeliculasPorActor(nombreActor);
     }
 
     @Override
